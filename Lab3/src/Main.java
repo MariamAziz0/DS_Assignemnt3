@@ -6,11 +6,10 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-//        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(1500);
-//        myHashDataStructure.batch_insert("file2");
-//        myHashDataStructure.displayHashTable();
-//        System.out.println(myHashDataStructure.getRehashCounter());
-
+        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(1500, false);
+        myHashDataStructure.batch_insert("file2");
+        myHashDataStructure.displayHashTable();
+        System.out.println(myHashDataStructure.getRehashCounter());
     }
 
 }
