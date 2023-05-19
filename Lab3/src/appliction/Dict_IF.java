@@ -1,9 +1,11 @@
 package appliction;
 
 public interface Dict_IF {
-    void insert();
-    void delete();
-    void search();
-    void batchInsert();
-    void batchDelete();
+    boolean insert(String key);
+    boolean delete(String key);
+    boolean search(String key);
+    int batchInsert(String fileName);
+    int batchDelete(String fileName);
+    void display();
+    int getCurrentElements();
 }
