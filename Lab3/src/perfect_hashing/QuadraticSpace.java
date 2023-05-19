@@ -12,6 +12,7 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
     private int N;
     private int currentElements;
     private int rehashCounter;
+    private int resizeCounter;
     private final File_Scanner_IF<T> fileScanner;
     private final boolean isDynamic;
 
@@ -19,6 +20,7 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
         this.N = N;
         this.currentElements = 0;
         this.rehashCounter = 0;
+        this.resizeCounter = 0;
         this.isDynamic = isDynamic;
         this.hashTable = (T[]) new Object[N * N];
         this.utilities = new Utilities();
@@ -31,37 +33,39 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
     }
 
     private void rehash(){
+        this.rehashCounter++;
         this.generateHashFunction();
-        System.out.println("Hash function has been changed.");
+//        System.out.println("Hash function has been changed.");
         T[] tempHashTable = (T[]) new Object[N * N];
         for(T key : this.hashTable)
             if (!(key == null))
                 tempHashTable[this.utilities.hash(key, h, N * N)] = key;
         this.hashTable = tempHashTable;
-        System.out.println("Rehashed.");
+//        System.out.println("Rehashed.");
     }
 
     private void resize(int new_N){
         if(new_N <= N || !isDynamic)
             return;
         N = new_N;
-        System.out.println("Resized");
+//        System.out.println("Resized");
+        this.resizeCounter++;
     }
 
     public boolean insert(T key){
-        if(currentElements == N){
-            System.out.println("Size Limit Reached.");
+        if(currentElements == N && !isDynamic)
             return false;
-        }
-        if(this.hashTable[this.utilities.hash(key, h, N * N)] == key){
+        if(this.hashTable[this.utilities.hash(key, h, N * N)] != null &&
+                this.hashTable[this.utilities.hash(key, h, N * N)].equals(key)){
             System.out.println("Element already exists in the hashtable.");
             return false;
         }
-        while(this.hashTable[this.utilities.hash(key, h, N * N)] != null) {
+        if(currentElements == N) {
             this.resize(currentElements + 1);
             this.rehash();
-            this.rehashCounter++;
         }
+        while(this.hashTable[this.utilities.hash(key, h, N * N)] != null)
+            this.rehash();
         this.hashTable[this.utilities.hash(key, h, N * N)] = key;
         this.currentElements++;
         return true;
@@ -82,7 +86,7 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
 
     public void displayHashTable(){
         for(int i = 0; i < N * N; i++)
-            System.out.println(i + ": " + ((this.hashTable[i] != null) ? this.hashTable[i] : "Null"));
+            System.out.println(i + ": " + ((this.hashTable[i] != null) ? this.hashTable[i] : "-"));
     }
 
     public int getRehashCounter(){
@@ -109,6 +113,18 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
             if(this.delete(key))
                 success_count++;
         return success_count;
+    }
+
+    public int getCurrentElements(){
+        return this.currentElements;
+    }
+
+    public int getResizeCounter(){
+        return this.resizeCounter;
+    }
+
+    public int getN(){
+        return this.N;
     }
 
 }

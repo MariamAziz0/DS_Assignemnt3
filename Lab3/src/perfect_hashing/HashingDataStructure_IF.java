@@ -9,5 +9,7 @@ public interface HashingDataStructure_IF<T> {
     public int batch_delete(String fileName);
     public int getRehashCounter();
     public void displayHashTable();
+    public int getCurrentElements();
+    public int getResizeCounter();
 
 }
