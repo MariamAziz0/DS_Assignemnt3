@@ -38,41 +38,57 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
 //        System.out.println("Hash function has been changed.");
         T[] tempHashTable = (T[]) new Object[N * N];
         for(T key : this.hashTable)
+        {
             if (!(key == null))
-                tempHashTable[this.utilities.hash(key, h, N * N)] = key;
+            {
+                if(tempHashTable[this.utilities.hash(key, h, N * N)] != null) {
+                    rehash();
+                    return;
+                } else
+                    tempHashTable[this.utilities.hash(key, h, N * N)] = key;
+            }
+        }
         this.hashTable = tempHashTable;
-//        System.out.println("Rehashed.");
     }
 
     private void resize(int new_N){
         if(new_N <= N || !isDynamic)
             return;
         N = new_N;
-//        System.out.println("Resized");
         this.resizeCounter++;
     }
 
     public boolean insert(T key){
+        // In case of Quadratic space && maximum # of elements reached, return false.
         if(currentElements == N && !isDynamic)
             return false;
-        if(this.hashTable[this.utilities.hash(key, h, N * N)] != null &&
-                this.hashTable[this.utilities.hash(key, h, N * N)].equals(key)){
+
+        // In case of the key already do exists, return false;
+        if(this.search(key))
+        {
             System.out.println("Element already exists in the hashtable.");
             return false;
         }
-        if(currentElements == N) {
+
+        // In case of Linear space && maximum # of elements reached, resize.
+        if(currentElements == N)
+        {
             this.resize(currentElements + 1);
             this.rehash();
         }
+
+        // As long as the new hash function leads to collision, rehash.
         while(this.hashTable[this.utilities.hash(key, h, N * N)] != null)
             this.rehash();
+
         this.hashTable[this.utilities.hash(key, h, N * N)] = key;
         this.currentElements++;
         return true;
     }
 
     public boolean search(T key){
-        return this.hashTable[this.utilities.hash(key, h, N * N)] != null;
+        return this.hashTable[this.utilities.hash(key, h, N * N)] != null &&
+                this.hashTable[this.utilities.hash(key, h, N * N)].equals(key);
     }
 
     public boolean delete(T key){

@@ -33,6 +33,7 @@ public class LinearSpace<T> implements HashingDataStructure_IF<T>{
         this.h = this.utilities.generateMatrix((int)Math.ceil(Math.log(N * N) / Math.log(2)), 32);
     }
 
+    // Fetch the appropriate bin for insertion, delegate to the quadratic space insertion function.
     @Override
     public boolean insert(T key) {
         return bins[this.utilities.hash(key, h, N)].insert(key);
@@ -98,6 +99,7 @@ public class LinearSpace<T> implements HashingDataStructure_IF<T>{
         return counter;
     }
 
+    // # of elements = K * N, such that K is a small constant.
     public int isItOofN(){
         int counter = 0;
         for(QuadraticSpace Q : bins)
