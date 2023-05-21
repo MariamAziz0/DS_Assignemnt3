@@ -63,7 +63,7 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
         if(currentElements == N && !isDynamic)
             return false;
 
-        // In case of the key already do exists, return false;
+        // In case of the key already does exist, return false;
         if(this.search(key))
         {
             System.out.println("Element already exists in the hashtable.");
@@ -121,7 +121,6 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
                 success_count++;
         return success_count;
     }
-
     public int batch_delete(String fileName){
         int success_count = 0;
         List<T> data = this.fileScanner.importData(fileName);
