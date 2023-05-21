@@ -15,6 +15,7 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
     private int resizeCounter;
     private final File_Scanner_IF<T> fileScanner;
     private final boolean isDynamic;
+    private final int MAX_BITS;
 
     public QuadraticSpace(int N, boolean isDynamic){
         this.N = N;
@@ -25,11 +26,12 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
         this.hashTable = (T[]) new Object[N * N];
         this.utilities = new Utilities();
         this.fileScanner = new Concrete_FS<>();
+        this.MAX_BITS = 64;
         this.generateHashFunction();
     }
 
     private void generateHashFunction(){
-        this.h = this.utilities.generateMatrix((int)Math.ceil(Math.log(N * N) / Math.log(2)), 32);
+        this.h = this.utilities.generateMatrix((int)Math.ceil(Math.log(N * N) / Math.log(2)), MAX_BITS);
     }
 
     private void rehash(){
