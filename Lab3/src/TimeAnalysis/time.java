@@ -58,7 +58,7 @@ public class time {
 
         for (int k = 0; k < 2; k++) {
             for (int i = 5; i < 18; i++) {
-                String fileName = "file" + i;
+                String fileName = "time/file" + i;
                 QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(sizes[i], false);
 
                 long start = System.nanoTime();
