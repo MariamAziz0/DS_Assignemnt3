@@ -1,8 +1,8 @@
 package TimeAnalysis;
 
 import IO.Concrete_FS;
-import perfect_hashing.LinearSpace;
-import perfect_hashing.QuadraticSpace;
+import Perfect_Hashing.LinearSpace;
+import Perfect_Hashing.QuadraticSpace;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package perfect_hashing;
+package Perfect_Hashing;
 
 public class Demo {
 

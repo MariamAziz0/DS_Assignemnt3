@@ -1,5 +1,8 @@
-package perfect_hashing;
+package JUnit_Tests;
 import org.junit.jupiter.api.Test;
+import Perfect_Hashing.LinearSpace;
+import Perfect_Hashing.QuadraticSpace;
+
 import static org.junit.jupiter.api.Assertions.*;
 public class Tests {
 

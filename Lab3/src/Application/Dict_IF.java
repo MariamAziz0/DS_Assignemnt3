@@ -1,4 +1,4 @@
-package appliction;
+package Application;
 
 public interface Dict_IF {
     boolean insert(String key);

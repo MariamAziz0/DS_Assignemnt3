@@ -1,7 +1,7 @@
-package cli;
+package CLI;
 
-import appliction.Dict_App;
-import appliction.Dict_IF;
+import Application.Dict_App;
+import Application.Dict_IF;
 import java.util.Scanner;
 
 public class CLI implements CLI_IF{
