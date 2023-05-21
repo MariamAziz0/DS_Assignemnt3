@@ -1,4 +1,4 @@
-package perfect_hashing;
+package Perfect_Hashing;
 
 import IO.Concrete_FS;
 import IO.File_Scanner_IF;

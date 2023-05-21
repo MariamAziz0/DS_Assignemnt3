@@ -1,4 +1,4 @@
-package perfect_hashing;
+package Perfect_Hashing;
 
 import IO.Concrete_FS;
 import IO.File_Scanner_IF;
@@ -92,7 +92,7 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
     }
 
     public boolean delete(T key){
-        if(this.hashTable[this.utilities.hash(key, h, N * N)] != null) {
+        if(this.hashTable[this.utilities.hash(key, h, N * N)] != null && this.hashTable[this.utilities.hash(key, h, N * N)].equals(key)) {
             this.hashTable[this.utilities.hash(key, h, N * N)] = null;
             this.currentElements--;
             return true;

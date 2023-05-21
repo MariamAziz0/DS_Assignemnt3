@@ -1,8 +1,8 @@
-package appliction;
+package Application;
 
-import perfect_hashing.HashingDataStructure_IF;
-import perfect_hashing.LinearSpace;
-import perfect_hashing.QuadraticSpace;
+import Perfect_Hashing.HashingDataStructure_IF;
+import Perfect_Hashing.LinearSpace;
+import Perfect_Hashing.QuadraticSpace;
 
 public class Dict_App implements Dict_IF{
 
