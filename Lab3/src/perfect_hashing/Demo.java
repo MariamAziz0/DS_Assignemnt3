@@ -12,13 +12,13 @@ public class Demo {
         System.out.println(myHashDataStructure.getResizeCounter());
         System.out.println(myHashDataStructure.getM());*/
 
-//        LinearSpace<String> myHashDataStructure2 = new LinearSpace<>(1500);
-//        int temp2 = myHashDataStructure2.batch_insert("file2");
-//        myHashDataStructure2.displayHashTable();
-//        System.out.println(temp2);
-//        System.out.println(myHashDataStructure2.getRehashCounter());
-//        System.out.println(myHashDataStructure2.getResizeCounter());
-//        System.out.println(myHashDataStructure2.isItOofN());
+        LinearSpace<String> myHashDataStructure2 = new LinearSpace<>(1500);
+        int temp2 = myHashDataStructure2.batch_insert("file2");
+        /*myHashDataStructure2.displayHashTable();*/
+        System.out.println(temp2);
+        System.out.println(myHashDataStructure2.getRehashCounter());
+        System.out.println(myHashDataStructure2.getResizeCounter());
+        System.out.println(myHashDataStructure2.isItOofN());
 
     }
 
