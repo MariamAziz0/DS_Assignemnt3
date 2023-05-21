@@ -142,5 +142,4 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
     public int getN(){
         return this.N;
     }
-
 }
