@@ -26,7 +26,7 @@ public class QuadraticSpace<T> implements HashingDataStructure_IF<T>{
         this.hashTable = (T[]) new Object[N * N];
         this.utilities = new Utilities();
         this.fileScanner = new Concrete_FS<>();
-        this.MAX_BITS = 64;
+        this.MAX_BITS = 128;
         this.generateHashFunction();
     }
 

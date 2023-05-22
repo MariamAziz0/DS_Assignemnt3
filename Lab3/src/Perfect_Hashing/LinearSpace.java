@@ -18,6 +18,7 @@ public class LinearSpace<T> implements HashingDataStructure_IF<T>{
     private final int N;
     private int[][] h;
     private QuadraticSpace[] bins;
+    private final int MAX_BITS;
 
     public LinearSpace(int N) {
         this.utilities = new Utilities();
@@ -26,11 +27,12 @@ public class LinearSpace<T> implements HashingDataStructure_IF<T>{
         for(int i = 0 ; i < N ; i++)
             bins[i] = new QuadraticSpace(1, true);
         this.N = N;
+        this.MAX_BITS = 128;
         this.generateHashFunction();
     }
 
     private void generateHashFunction(){
-        this.h = this.utilities.generateMatrix((int)Math.ceil(Math.log(N * N) / Math.log(2)), 32);
+        this.h = this.utilities.generateMatrix((int)Math.ceil(Math.log(N * N) / Math.log(2)), MAX_BITS);
     }
 
     // Fetch the appropriate bin for insertion, delegate to the quadratic space insertion function.

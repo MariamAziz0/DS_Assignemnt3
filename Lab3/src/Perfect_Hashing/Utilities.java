@@ -1,11 +1,14 @@
 package Perfect_Hashing;
 
+import java.security.*;
+import java.math.BigInteger;
+
 public class Utilities {
 
     private final int MAX_BITS;
 
     public Utilities(){
-        this.MAX_BITS = 64;
+        this.MAX_BITS = 128;
     }
 
     public int[] matrixMultiplication(int[][] h, int[] x){
@@ -34,10 +37,13 @@ public class Utilities {
         return randomMatrix;
     }
 
-    public <T> int[] convertToBinArr(T obj){
-        int strHashCode = obj.hashCode();
+    public <T> int[] convertToBinArr(T obj) {
+        if(! (obj instanceof String))
+            return null;
+//        int strHashCode = obj.hashCode();
         int[] binaryArray = new int[MAX_BITS];
-        String tempBinaryStr = "0".repeat(MAX_BITS - Integer.toBinaryString(strHashCode).length()) + Integer.toBinaryString(strHashCode);
+//        String tempBinaryStr = "0".repeat(MAX_BITS - Integer.toBinaryString(strHashCode).length()) + Integer.toBinaryString(strHashCode);
+        String tempBinaryStr = proHash((String)obj);
         for(int i = 0 ; i < MAX_BITS ; i++)
             binaryArray[i] = (tempBinaryStr.charAt(i) == '1') ? 1 : 0;
         return binaryArray;
@@ -69,19 +75,29 @@ public class Utilities {
         return binaryToDecimal(matrixMultiplication(h, convertToBinArr(obj))) % tableSize;
     }
 
-    // returns bits string of length (length(s) * 8)
-    public String proHash(String s){
-        String hashCode = "";
-        String tempCharCode;
-        for(int i = 0 ; i < s.length() ; i++) {
-            tempCharCode = Integer.toBinaryString(s.charAt(i));
-            tempCharCode = ("0".repeat(8 - tempCharCode.length())).concat(tempCharCode);
-            hashCode = hashCode.concat(tempCharCode);
+    // returns bits string of length 128
+    public String proHash(String s) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Here");
+            return null;
         }
-        if(hashCode.length() > 64)
-            hashCode = hashCode.substring(0, 64);
-        else if(hashCode.length() < 64)
-            hashCode = ("0".repeat(8 - hashCode.length())).concat(hashCode);
+        byte[] messageDigest = md.digest(s.getBytes());
+        BigInteger bigInteger = new BigInteger(1, messageDigest);
+        String hashCode = bigInteger.toString(2);
+//        String hashCode = "";
+//        String tempCharCode;
+//        for(int i = 0 ; i < s.length() ; i++) {
+//            tempCharCode = Integer.toBinaryString(s.charAt(i));
+//            tempCharCode = ("0".repeat(8 - tempCharCode.length())).concat(tempCharCode);
+//            hashCode = hashCode.concat(tempCharCode);
+//        }
+        if(hashCode.length() > MAX_BITS)
+            hashCode = hashCode.substring(0, MAX_BITS);
+        else if(hashCode.length() < MAX_BITS)
+            hashCode = ("0".repeat(MAX_BITS - hashCode.length())).concat(hashCode);
         return hashCode;
     }
 
