@@ -38,12 +38,8 @@ public class Utilities {
     }
 
     public <T> int[] convertToBinArr(T obj) {
-        if(! (obj instanceof String))
-            return null;
-//        int strHashCode = obj.hashCode();
         int[] binaryArray = new int[MAX_BITS];
-//        String tempBinaryStr = "0".repeat(MAX_BITS - Integer.toBinaryString(strHashCode).length()) + Integer.toBinaryString(strHashCode);
-        String tempBinaryStr = proHash((String)obj);
+        String tempBinaryStr = proHash(obj);
         for(int i = 0 ; i < MAX_BITS ; i++)
             binaryArray[i] = (tempBinaryStr.charAt(i) == '1') ? 1 : 0;
         return binaryArray;
@@ -75,29 +71,33 @@ public class Utilities {
         return binaryToDecimal(matrixMultiplication(h, convertToBinArr(obj))) % tableSize;
     }
 
-    // returns bits string of length 128
-    public String proHash(String s) {
+    /*
+     * Reference:
+     * https://stackoverflow.com/questions/415953/how-can-i-generate-an-md5-hash-in-java
+     * returns bits string of length 128
+     */
+    public String proHash(Object obj) {
+        String s;
+        if(obj instanceof String)
+            s = (String)obj;
+        else
+            s = obj.toString();
+
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            System.out.println("Here");
             return null;
         }
         byte[] messageDigest = md.digest(s.getBytes());
         BigInteger bigInteger = new BigInteger(1, messageDigest);
         String hashCode = bigInteger.toString(2);
-//        String hashCode = "";
-//        String tempCharCode;
-//        for(int i = 0 ; i < s.length() ; i++) {
-//            tempCharCode = Integer.toBinaryString(s.charAt(i));
-//            tempCharCode = ("0".repeat(8 - tempCharCode.length())).concat(tempCharCode);
-//            hashCode = hashCode.concat(tempCharCode);
-//        }
+
         if(hashCode.length() > MAX_BITS)
             hashCode = hashCode.substring(0, MAX_BITS);
         else if(hashCode.length() < MAX_BITS)
             hashCode = ("0".repeat(MAX_BITS - hashCode.length())).concat(hashCode);
+
         return hashCode;
     }
 
