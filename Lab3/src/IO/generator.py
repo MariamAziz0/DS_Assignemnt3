@@ -54,5 +54,5 @@ def run():
     export_to_file(generate_random_words(number_of_words, max_word_len), file_name)
     print('Generated successfully, file can be found in the IO directory.')
 
-
-run()
+while True:
+    run()
