@@ -762,7 +762,102 @@ public class Tests {
         assertFalse(myHashDataStructure.search("zvBQpaa"));
     }
 
+    // random small 20
+    @Test
+    void file9_insert () {
+        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(100, false);
+        int temp = myHashDataStructure.batch_insert("file9");
+        assertEquals(temp , 20);
+        assertTrue(myHashDataStructure.getRehashCounter() < 3);
+
+        assertFalse(myHashDataStructure.insert("Km"));
+        assertFalse(myHashDataStructure.insert("b"));
+        assertFalse(myHashDataStructure.insert("uD"));
+        assertFalse(myHashDataStructure.insert("vlaab"));
+        assertFalse(myHashDataStructure.insert("DiPa"));
+
+        assertTrue(myHashDataStructure.insert("kkkkkkkkkkkkkkkkkkkkkkk"));
+        assertFalse(myHashDataStructure.insert("kkkkkkkkkkkkkkkkkkkkkkk"));
+        assertTrue(myHashDataStructure.insert("bx"));
+        assertFalse(myHashDataStructure.insert("bx"));
+        assertTrue(myHashDataStructure.insert("vlaabaa"));
+        assertFalse(myHashDataStructure.insert("vlaabaa"));
+    }
+    @Test
+    void file9_delete () {
+        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(100, false);
+        int temp = myHashDataStructure.batch_insert("file9");
+        assertEquals(temp , 20);
+        assertTrue(myHashDataStructure.getRehashCounter() < 3);
+
+        assertFalse(myHashDataStructure.delete("kz"));
+        assertFalse(myHashDataStructure.delete("ax"));
+        assertFalse(myHashDataStructure.delete("ascxzczsfasz"));
+        assertFalse(myHashDataStructure.delete("aaaaaaaaxxxxxxxxxxxxxfffffffffffffa"));
+        assertFalse(myHashDataStructure.delete("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"));
+
+        assertTrue(myHashDataStructure.delete("uD"));
+        assertFalse(myHashDataStructure.delete("uD"));
+        assertTrue(myHashDataStructure.delete("b"));
+        assertFalse(myHashDataStructure.delete("b"));
+        assertTrue(myHashDataStructure.delete("vlaab"));
+        assertFalse(myHashDataStructure.delete("vlaab"));
+    }
+    @Test
+    void file9_search () {
+        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(100, false);
+        int temp = myHashDataStructure.batch_insert("file9");
+        assertEquals(temp , 20);
+        assertTrue(myHashDataStructure.getRehashCounter() < 3);
+
+        assertFalse(myHashDataStructure.search("kz"));
+        assertFalse(myHashDataStructure.search("ax"));
+        assertFalse(myHashDataStructure.search("ascxzczsfasz"));
+        assertFalse(myHashDataStructure.search("aaaaaaaaxxxxxxxxxxxxxfffffffffffffa"));
+        assertFalse(myHashDataStructure.search("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"));
+
+        assertTrue(myHashDataStructure.search("uD"));
+        assertTrue(myHashDataStructure.search("b"));
+        assertTrue(myHashDataStructure.search("vlaab"));
+        assertTrue(myHashDataStructure.search("DiPa"));
+        assertTrue(myHashDataStructure.search("vlaab"));
+    }
+    @Test
+    void file9_combination () {
+        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(100, false);
+        int temp = myHashDataStructure.batch_insert("file9");
+        assertEquals(temp , 20);
+        assertTrue(myHashDataStructure.getRehashCounter() < 3);
+
+        // already exist
+        assertTrue(myHashDataStructure.search("uD"));
+        assertTrue(myHashDataStructure.search("vlaab"));
+        assertFalse(myHashDataStructure.insert("uD"));
+        assertFalse(myHashDataStructure.insert("vlaab"));
+        assertTrue(myHashDataStructure.search("uD"));
+        assertTrue(myHashDataStructure.search("vlaab"));
+
+        // search + insert
+        assertFalse(myHashDataStructure.search("bx"));
+        assertFalse(myHashDataStructure.search("vlaabaa"));
+        assertTrue(myHashDataStructure.insert("bx"));
+        assertTrue(myHashDataStructure.insert("vlaabaa"));
+        assertTrue(myHashDataStructure.search("bx"));
+        assertTrue(myHashDataStructure.search("vlaabaa"));
+
+        // search + delete
+        assertFalse(myHashDataStructure.search("kz"));
+        assertFalse(myHashDataStructure.search("ax"));
+        assertFalse(myHashDataStructure.delete("kz"));
+        assertFalse(myHashDataStructure.delete("ax"));
+        assertTrue(myHashDataStructure.delete("uD"));
+        assertTrue(myHashDataStructure.delete("vlaab"));
+        assertFalse(myHashDataStructure.search("uD"));
+        assertFalse(myHashDataStructure.search("vlaab"));
+    }
+
     // random
+    // 1000
     @Test
     void file8_insert () {
         QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(1500, false);
@@ -856,98 +951,98 @@ public class Tests {
         assertFalse(myHashDataStructure.search("zvBQp"));
     }
 
-    // random
+    // 10000
     @Test
-    void file9_insert () {
-        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(100, false);
-        int temp = myHashDataStructure.batch_insert("file9");
-        assertEquals(temp , 20);
+    void file16_insert () {
+        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(15000, false);
+        int temp = myHashDataStructure.batch_insert("file16");
+        assertEquals(temp , 10000);
         assertTrue(myHashDataStructure.getRehashCounter() < 3);
 
-        assertFalse(myHashDataStructure.insert("Km"));
-        assertFalse(myHashDataStructure.insert("b"));
-        assertFalse(myHashDataStructure.insert("uD"));
-        assertFalse(myHashDataStructure.insert("vlaab"));
-        assertFalse(myHashDataStructure.insert("DiPa"));
+        assertFalse(myHashDataStructure.insert("aEd"));
+        assertFalse(myHashDataStructure.insert("xKe"));
+        assertFalse(myHashDataStructure.insert("KSNm"));
+        assertFalse(myHashDataStructure.insert("eFOKaG"));
+        assertFalse(myHashDataStructure.insert("IZBR"));
 
         assertTrue(myHashDataStructure.insert("kkkkkkkkkkkkkkkkkkkkkkk"));
         assertFalse(myHashDataStructure.insert("kkkkkkkkkkkkkkkkkkkkkkk"));
         assertTrue(myHashDataStructure.insert("bx"));
         assertFalse(myHashDataStructure.insert("bx"));
-        assertTrue(myHashDataStructure.insert("vlaabaa"));
-        assertFalse(myHashDataStructure.insert("vlaabaa"));
+        assertTrue(myHashDataStructure.insert("zvBQpaa"));
+        assertFalse(myHashDataStructure.insert("zvBQpaa"));
     }
     @Test
-    void file9_delete () {
-        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(100, false);
-        int temp = myHashDataStructure.batch_insert("file9");
-        assertEquals(temp , 20);
+    void file16_delete () {
+        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(15000, false);
+        int temp = myHashDataStructure.batch_insert("file16");
+        assertEquals(temp , 10000);
         assertTrue(myHashDataStructure.getRehashCounter() < 3);
 
-        assertFalse(myHashDataStructure.delete("kz"));
+        assertFalse(myHashDataStructure.delete("kZz"));
         assertFalse(myHashDataStructure.delete("ax"));
         assertFalse(myHashDataStructure.delete("ascxzczsfasz"));
         assertFalse(myHashDataStructure.delete("aaaaaaaaxxxxxxxxxxxxxfffffffffffffa"));
         assertFalse(myHashDataStructure.delete("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"));
 
-        assertTrue(myHashDataStructure.delete("uD"));
-        assertFalse(myHashDataStructure.delete("uD"));
-        assertTrue(myHashDataStructure.delete("b"));
-        assertFalse(myHashDataStructure.delete("b"));
-        assertTrue(myHashDataStructure.delete("vlaab"));
-        assertFalse(myHashDataStructure.delete("vlaab"));
+        assertTrue(myHashDataStructure.delete("KSNm"));
+        assertFalse(myHashDataStructure.delete("KSNm"));
+        assertTrue(myHashDataStructure.delete("xKe"));
+        assertFalse(myHashDataStructure.delete("xKe"));
+        assertTrue(myHashDataStructure.delete("eFOKaG"));
+        assertFalse(myHashDataStructure.delete("eFOKaG"));
     }
     @Test
-    void file9_search () {
-        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(100, false);
-        int temp = myHashDataStructure.batch_insert("file9");
-        assertEquals(temp , 20);
+    void file16_search () {
+        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(15000, false);
+        int temp = myHashDataStructure.batch_insert("file16");
+        assertEquals(temp , 10000);
         assertTrue(myHashDataStructure.getRehashCounter() < 3);
 
-        assertFalse(myHashDataStructure.search("kz"));
+        assertFalse(myHashDataStructure.search("kZz"));
         assertFalse(myHashDataStructure.search("ax"));
         assertFalse(myHashDataStructure.search("ascxzczsfasz"));
         assertFalse(myHashDataStructure.search("aaaaaaaaxxxxxxxxxxxxxfffffffffffffa"));
         assertFalse(myHashDataStructure.search("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"));
 
-        assertTrue(myHashDataStructure.search("uD"));
-        assertTrue(myHashDataStructure.search("b"));
-        assertTrue(myHashDataStructure.search("vlaab"));
-        assertTrue(myHashDataStructure.search("DiPa"));
-        assertTrue(myHashDataStructure.search("vlaab"));
+        assertTrue(myHashDataStructure.search("KSNm"));
+        assertTrue(myHashDataStructure.search("xKe"));
+        assertTrue(myHashDataStructure.search("eFOKaG"));
+        assertTrue(myHashDataStructure.search("aEd"));
+        assertTrue(myHashDataStructure.search("eFOKaG"));
     }
     @Test
-    void file9_combination () {
-        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(100, false);
-        int temp = myHashDataStructure.batch_insert("file9");
-        assertEquals(temp , 20);
+    void file16_combination () {
+        QuadraticSpace<String> myHashDataStructure = new QuadraticSpace<>(15000, false);
+        int temp = myHashDataStructure.batch_insert("file16");
+        assertEquals(temp , 10000);
         assertTrue(myHashDataStructure.getRehashCounter() < 3);
 
         // already exist
-        assertTrue(myHashDataStructure.search("uD"));
-        assertTrue(myHashDataStructure.search("vlaab"));
-        assertFalse(myHashDataStructure.insert("uD"));
-        assertFalse(myHashDataStructure.insert("vlaab"));
-        assertTrue(myHashDataStructure.search("uD"));
-        assertTrue(myHashDataStructure.search("vlaab"));
+        assertTrue(myHashDataStructure.search("KSNm"));
+        assertTrue(myHashDataStructure.search("eFOKaG"));
+        assertFalse(myHashDataStructure.insert("KSNm"));
+        assertFalse(myHashDataStructure.insert("eFOKaG"));
+        assertTrue(myHashDataStructure.search("KSNm"));
+        assertTrue(myHashDataStructure.search("eFOKaG"));
 
         // search + insert
         assertFalse(myHashDataStructure.search("bx"));
-        assertFalse(myHashDataStructure.search("vlaabaa"));
+        assertFalse(myHashDataStructure.search("zvBQpaa"));
         assertTrue(myHashDataStructure.insert("bx"));
-        assertTrue(myHashDataStructure.insert("vlaabaa"));
+        assertTrue(myHashDataStructure.insert("zvBQpaa"));
         assertTrue(myHashDataStructure.search("bx"));
-        assertTrue(myHashDataStructure.search("vlaabaa"));
+        assertTrue(myHashDataStructure.search("zvBQpaa"));
 
         // search + delete
-        assertFalse(myHashDataStructure.search("kz"));
+        assertFalse(myHashDataStructure.search("kZz"));
         assertFalse(myHashDataStructure.search("ax"));
-        assertFalse(myHashDataStructure.delete("kz"));
+        assertFalse(myHashDataStructure.delete("kZz"));
         assertFalse(myHashDataStructure.delete("ax"));
-        assertTrue(myHashDataStructure.delete("uD"));
-        assertTrue(myHashDataStructure.delete("vlaab"));
-        assertFalse(myHashDataStructure.search("uD"));
-        assertFalse(myHashDataStructure.search("vlaab"));
+        assertTrue(myHashDataStructure.delete("KSNm"));
+        assertTrue(myHashDataStructure.delete("eFOKaG"));
+        assertFalse(myHashDataStructure.search("KSNm"));
+        assertFalse(myHashDataStructure.search("eFOKaG"));
     }
 
     // Integers
@@ -1502,6 +1597,7 @@ public class Tests {
         assertFalse(myHashDataStructure.search("bx"));
         assertFalse(myHashDataStructure.search("zvBQpaa"));
     }
+
 
     ////////////////////////////// Linear///////////////////////////
 
@@ -2230,6 +2326,7 @@ public class Tests {
     }
 
     // random
+    // 1000
     @Test
     void file8N_insert () {
         LinearSpace<String> myHashDataStructure = new LinearSpace<>(1500);
@@ -2317,6 +2414,187 @@ public class Tests {
         assertTrue(myHashDataStructure.delete("zvBQp"));
         assertFalse(myHashDataStructure.search("CEMgIVDuqc"));
         assertFalse(myHashDataStructure.search("zvBQp"));
+    }
+
+    // 10000
+    @Test
+    void file16N_insert () {
+        LinearSpace<String> myHashDataStructure = new LinearSpace<>(15000);
+        int temp = myHashDataStructure.batch_insert("file16");
+        assertEquals(temp , 10000);
+
+        assertFalse(myHashDataStructure.insert("aEd"));
+        assertFalse(myHashDataStructure.insert("xKe"));
+        assertFalse(myHashDataStructure.insert("KSNm"));
+        assertFalse(myHashDataStructure.insert("eFOKaG"));
+        assertFalse(myHashDataStructure.insert("IZBR"));
+
+        assertTrue(myHashDataStructure.insert("kkkkkkkkkkkkkkkkkkkkkkk"));
+        assertFalse(myHashDataStructure.insert("kkkkkkkkkkkkkkkkkkkkkkk"));
+        assertTrue(myHashDataStructure.insert("bx"));
+        assertFalse(myHashDataStructure.insert("bx"));
+        assertTrue(myHashDataStructure.insert("zvBQpaa"));
+        assertFalse(myHashDataStructure.insert("zvBQpaa"));
+    }
+    @Test
+    void file16N_delete () {
+        LinearSpace<String> myHashDataStructure = new LinearSpace<>(15000);
+        int temp = myHashDataStructure.batch_insert("file16");
+        assertEquals(temp , 10000);
+
+        assertFalse(myHashDataStructure.delete("kZz"));
+        assertFalse(myHashDataStructure.delete("ax"));
+        assertFalse(myHashDataStructure.delete("ascxzczsfasz"));
+        assertFalse(myHashDataStructure.delete("aaaaaaaaxxxxxxxxxxxxxfffffffffffffa"));
+        assertFalse(myHashDataStructure.delete("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"));
+
+        assertTrue(myHashDataStructure.delete("KSNm"));
+        assertFalse(myHashDataStructure.delete("KSNm"));
+        assertTrue(myHashDataStructure.delete("xKe"));
+        assertFalse(myHashDataStructure.delete("xKe"));
+        assertTrue(myHashDataStructure.delete("eFOKaG"));
+        assertFalse(myHashDataStructure.delete("eFOKaG"));
+    }
+    @Test
+    void file16N_search () {
+        LinearSpace<String> myHashDataStructure = new LinearSpace<>(15000);
+        int temp = myHashDataStructure.batch_insert("file16");
+        assertEquals(temp , 10000);
+
+        assertFalse(myHashDataStructure.search("kZz"));
+        assertFalse(myHashDataStructure.search("ax"));
+        assertFalse(myHashDataStructure.search("ascxzczsfasz"));
+        assertFalse(myHashDataStructure.search("aaaaaaaaxxxxxxxxxxxxxfffffffffffffa"));
+        assertFalse(myHashDataStructure.search("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"));
+
+        assertTrue(myHashDataStructure.search("KSNm"));
+        assertTrue(myHashDataStructure.search("xKe"));
+        assertTrue(myHashDataStructure.search("eFOKaG"));
+        assertTrue(myHashDataStructure.search("aEd"));
+        assertTrue(myHashDataStructure.search("eFOKaG"));
+    }
+    @Test
+    void file16N_combination () {
+        LinearSpace<String> myHashDataStructure = new LinearSpace<>(15000);
+        int temp = myHashDataStructure.batch_insert("file16");
+        assertEquals(temp , 10000);
+
+        // already exist
+        assertTrue(myHashDataStructure.search("KSNm"));
+        assertTrue(myHashDataStructure.search("eFOKaG"));
+        assertFalse(myHashDataStructure.insert("KSNm"));
+        assertFalse(myHashDataStructure.insert("eFOKaG"));
+        assertTrue(myHashDataStructure.search("KSNm"));
+        assertTrue(myHashDataStructure.search("eFOKaG"));
+
+        // search + insert
+        assertFalse(myHashDataStructure.search("bx"));
+        assertFalse(myHashDataStructure.search("zvBQpaa"));
+        assertTrue(myHashDataStructure.insert("bx"));
+        assertTrue(myHashDataStructure.insert("zvBQpaa"));
+        assertTrue(myHashDataStructure.search("bx"));
+        assertTrue(myHashDataStructure.search("zvBQpaa"));
+
+        // search + delete
+        assertFalse(myHashDataStructure.search("kZz"));
+        assertFalse(myHashDataStructure.search("ax"));
+        assertFalse(myHashDataStructure.delete("kZz"));
+        assertFalse(myHashDataStructure.delete("ax"));
+        assertTrue(myHashDataStructure.delete("KSNm"));
+        assertTrue(myHashDataStructure.delete("eFOKaG"));
+        assertFalse(myHashDataStructure.search("KSNm"));
+        assertFalse(myHashDataStructure.search("eFOKaG"));
+    }
+
+
+    // 100000
+    @Test
+    void file17N_insert () {
+        LinearSpace<String> myHashDataStructure = new LinearSpace<>(100010);
+        int temp = myHashDataStructure.batch_insert("file17");
+        assertEquals(temp , 100000);
+
+        assertFalse(myHashDataStructure.insert("UAJx"));
+        assertFalse(myHashDataStructure.insert("cZnMnEc"));
+        assertFalse(myHashDataStructure.insert("rrTmkHjO"));
+        assertFalse(myHashDataStructure.insert("KWRKR"));
+        assertFalse(myHashDataStructure.insert("HYweGf"));
+
+        assertTrue(myHashDataStructure.insert("kkkkkkkkkkkkkkkkkkkkkkk"));
+        assertFalse(myHashDataStructure.insert("kkkkkkkkkkkkkkkkkkkkkkk"));
+        assertTrue(myHashDataStructure.insert("bZXx"));
+        assertFalse(myHashDataStructure.insert("bZXx"));
+        assertTrue(myHashDataStructure.insert("zvBQpaa"));
+        assertFalse(myHashDataStructure.insert("zvBQpaa"));
+    }
+    @Test
+    void file17N_delete () {
+        LinearSpace<String> myHashDataStructure = new LinearSpace<>(100010);
+        int temp = myHashDataStructure.batch_insert("file17");
+        assertEquals(temp , 100000);
+
+        assertFalse(myHashDataStructure.delete("kZXz"));
+        assertFalse(myHashDataStructure.delete("aZXx"));
+        assertFalse(myHashDataStructure.delete("ascxzczsfasz"));
+        assertFalse(myHashDataStructure.delete("aaaaaaaaxxxxxxxxxxxxxfffffffffffffa"));
+        assertFalse(myHashDataStructure.delete("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"));
+
+        assertTrue(myHashDataStructure.delete("rrTmkHjO"));
+        assertFalse(myHashDataStructure.delete("rrTmkHjO"));
+        assertTrue(myHashDataStructure.delete("cZnMnEc"));
+        assertFalse(myHashDataStructure.delete("cZnMnEc"));
+        assertTrue(myHashDataStructure.delete("KWRKR"));
+        assertFalse(myHashDataStructure.delete("KWRKR"));
+    }
+    @Test
+    void file17N_search () {
+        LinearSpace<String> myHashDataStructure = new LinearSpace<>(100010);
+        int temp = myHashDataStructure.batch_insert("file17");
+        assertEquals(temp , 100000);
+
+        assertFalse(myHashDataStructure.search("kZXz"));
+        assertFalse(myHashDataStructure.search("aZXx"));
+        assertFalse(myHashDataStructure.search("ascxzczsfasz"));
+        assertFalse(myHashDataStructure.search("aaaaaaaaxxxxxxxxxxxxxfffffffffffffa"));
+        assertFalse(myHashDataStructure.search("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"));
+
+        assertTrue(myHashDataStructure.search("rrTmkHjO"));
+        assertTrue(myHashDataStructure.search("cZnMnEc"));
+        assertTrue(myHashDataStructure.search("KWRKR"));
+        assertTrue(myHashDataStructure.search("UAJx"));
+        assertTrue(myHashDataStructure.search("KWRKR"));
+    }
+    @Test
+    void file17N_combination () {
+        LinearSpace<String> myHashDataStructure = new LinearSpace<>(100010);
+        int temp = myHashDataStructure.batch_insert("file17");
+        assertEquals(temp , 100000);
+
+        // already exist
+        assertTrue(myHashDataStructure.search("rrTmkHjO"));
+        assertTrue(myHashDataStructure.search("KWRKR"));
+        assertFalse(myHashDataStructure.insert("rrTmkHjO"));
+        assertFalse(myHashDataStructure.insert("KWRKR"));
+        assertTrue(myHashDataStructure.search("rrTmkHjO"));
+        assertTrue(myHashDataStructure.search("KWRKR"));
+
+        // search + insert
+        assertFalse(myHashDataStructure.search("bZZx"));
+        assertFalse(myHashDataStructure.search("zvBQpaa"));
+        assertTrue(myHashDataStructure.insert("bZZx"));
+        assertTrue(myHashDataStructure.insert("zvBQpaa"));
+        assertTrue(myHashDataStructure.search("bx"));
+        assertTrue(myHashDataStructure.search("zvBQpaa"));
+
+        // search + delete
+        assertFalse(myHashDataStructure.search("kZXXz"));
+        assertFalse(myHashDataStructure.search("aZXx"));
+        assertFalse(myHashDataStructure.delete("kZXXz"));
+        assertFalse(myHashDataStructure.delete("aZXx"));
+        assertTrue(myHashDataStructure.delete("rrTmkHjO"));
+        assertTrue(myHashDataStructure.delete("KWRKR"));
+        assertFalse(myHashDataStructure.search("rrTmkHjO"));
+        assertFalse(myHashDataStructure.search("KWRKR"));
     }
 
     // random
